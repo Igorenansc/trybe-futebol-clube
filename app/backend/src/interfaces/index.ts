@@ -19,3 +19,15 @@ export interface IMatch {
   awayTeamGoals: number,
   inProgress: boolean,
 }
+
+export interface IToken {
+  data: {
+    id: number,
+    username: string,
+    role: string,
+    email: string,
+    password: string,
+  }
+  iat: number,
+  exp: number
+}

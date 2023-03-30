@@ -10,11 +10,11 @@ export default class UserService {
     this._model = model;
   }
 
-  async login(email: string, password: string):Promise<{ type: string | null; message: string }> {
+  async login(email: string, pass: string):Promise<{ type: string | null; message: string }> {
     const user = await this._model.findOne({ where: { email } });
     const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!email || !password) {
+    if (!email || !pass) {
       return { type: 'MISSING_VALUE', message: 'All fields must be filled' };
     }
 
@@ -22,11 +22,11 @@ export default class UserService {
       return { type: 'NOT_FOUND', message: 'Invalid email or password' };
     }
 
-    if (!bcrypt.compareSync(password, user.dataValues.password) || password.length < 6) {
+    if (!bcrypt.compareSync(pass, user.dataValues.password) || pass.length < 6) {
       return { type: 'NOT_FOUND', message: 'Invalid email or password' };
     }
 
-    const { _password, ...userWithoutPassword } = user.dataValues;
+    const { password, ...userWithoutPassword } = user.dataValues;
     const generatedToken = token.generate(userWithoutPassword);
 
     return { type: null, message: generatedToken };
