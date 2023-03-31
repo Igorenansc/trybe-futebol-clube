@@ -19,11 +19,11 @@ export default class UserService {
     }
 
     if (!user || !emailRegEx.test(email)) {
-      return { type: 'NOT_FOUND', message: 'Invalid email or password' };
+      return { type: 'NOT_AUTHORIZED', message: 'Invalid email or password' };
     }
 
     if (!bcrypt.compareSync(pass, user.dataValues.password) || pass.length < 6) {
-      return { type: 'NOT_FOUND', message: 'Invalid email or password' };
+      return { type: 'NOT_AUTHORIZED', message: 'Invalid email or password' };
     }
 
     const { password, ...userWithoutPassword } = user.dataValues;

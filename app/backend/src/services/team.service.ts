@@ -8,15 +8,15 @@ export default class TeamService {
     this._model = model;
   }
 
-  async getAll():Promise<{ type: null; message: Promise<Team[]>; }> {
-    const teams = this._model.findAll();
+  async getAll():Promise<{ type: null; message: Team[]; }> {
+    const teams = await this._model.findAll();
 
     return { type: null, message: teams };
   }
 
   async getById(id:number)
-    :Promise<{ type: string; message: string; } | { type: null; message: Promise<Team | null>; }> {
-    const team = this._model.findByPk(id);
+    :Promise<{ type: string; message: string; } | { type: null; message: Team; }> {
+    const team = await this._model.findByPk(id);
 
     if (!team) return { type: 'NOT_FOUND', message: 'Team not found!' };
 

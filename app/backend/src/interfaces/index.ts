@@ -11,13 +11,16 @@ export interface IUser {
   password?: string,
 }
 
-export interface IMatch {
-  id: number,
+export interface IMatch extends IGoals {
+  id?: number,
   homeTeamId: number,
-  homeTeamGoals: number,
   awayTeamId: number,
+  inProgress?: boolean,
+}
+
+export interface IGoals {
+  homeTeamGoals: number,
   awayTeamGoals: number,
-  inProgress: boolean,
 }
 
 export interface IToken {

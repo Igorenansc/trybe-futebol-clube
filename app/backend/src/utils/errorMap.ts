@@ -1,5 +1,5 @@
-const errors = ['NOT_FOUND', 'INVALID_VALUE', 'MISSING_VALUE'];
-const statuses = [401, 422, 400];
+const errors = ['NOT_AUTHORIZED', 'INVALID_VALUE', 'MISSING_VALUE', 'NOT_FOUND'];
+const statuses = [401, 422, 400, 404];
 
 interface IError {
   [key: string]: number;
