@@ -1,4 +1,5 @@
 import { ModelStatic } from 'sequelize';
+// import models from '../database/models';
 import Match from '../database/models/match.model';
 import Team from '../database/models/team.model';
 import { IGoals, IMatch } from '../interfaces';
@@ -41,4 +42,24 @@ export default class MatchService {
     const newMatch = await this._model.create({ ...matchInfo, inProgress: true });
     return { type: null, message: newMatch };
   }
+
+  // static async getAllLeaderboards() {
+  //   const leaderboards = await models.query(`
+  //     SELECT team.team_name AS name,
+  //     ((SUM(matches.home_team_goals AS htg > matches.away_team_goals AS atg) * 3) + SUM(htg = atg))
+  //       AS totalPoints,
+  //     COUNT(matches.home_team_id) AS totalGames,
+  //     SUM(htg > atg) AS totalVictories,
+  //     SUM(htg = atg) AS totalDraws,
+  //     SUM(htg < atg) AS totalLosses,
+  //     SUM(htg) AS goalsFavor,
+  //     SUM(atg) AS goalsOwn,
+  //     SUM(htg) - SUM(atg) AS goalsBalance
+  //     FROM teams JOIN matches ON teams.id = matches.home_team_id
+  //     WHERE matches.in_progress = false
+  //     GROUP BY name
+  //     ORDER BY totalPoints DESC
+  //   `);
+  //   return { type: null, message: leaderboards };
+  // }
 }
