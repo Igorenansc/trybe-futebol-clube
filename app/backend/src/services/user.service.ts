@@ -11,12 +11,13 @@ export default class UserService {
   }
 
   async login(email: string, pass: string):Promise<{ type: string | null; message: string }> {
-    const user = await this._model.findOne({ where: { email } });
     const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!email || !pass) {
       return { type: 'MISSING_VALUE', message: 'All fields must be filled' };
     }
+
+    const user = await this._model.findOne({ where: { email } });
 
     if (!user || !emailRegEx.test(email)) {
       return { type: 'NOT_AUTHORIZED', message: 'Invalid email or password' };
